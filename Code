@@ -1,0 +1,104 @@
+#include <iostream>
+#include <cmath>  // Для математичних функцій
+using namespace std;
+
+// Функція для перевірки введених даних на приналежність діапазону [-100, 100]
+bool isValidInput(double value) {
+    return value >= -100 && value <= 100;
+}
+
+// Proc31: Функція для введення кута, перевірки та обчислення його в радіанах
+double inputAndConvertToRadians() {
+    double degrees;
+    cout << "Введіть кут у градусах (діапазон [-100, 100]): ";
+    cin >> degrees;
+
+    if (!isValidInput(degrees)) {
+        cout << "Помилка: Кут виходить за межі допустимого діапазону!\n";
+        return -1; // Повертаємо -1 у разі некоректного введення
+    }
+
+    const double PI = 3.14; // Значення π
+    return (degrees * PI) / 180.0; // Формула перетворення градусів у радіани
+}
+
+// Boolean8: Функція для введення і перевірки чисел
+void inputAndCheckOddness() {
+    int A, B;
+    cout << "Введіть два цілі числа (A та B, діапазон [-100, 100]): \n";
+
+    // Введення першого числа
+    cout << "Число A: ";
+    cin >> A;
+    if (!isValidInput(A)) {
+        cout << "Помилка: Число A виходить за межі допустимого діапазону!\n";
+        return;
+    }
+
+    // Введення другого числа
+    cout << "Число B: ";
+    cin >> B;
+    if (!isValidInput(B)) {
+        cout << "Помилка: Число B виходить за межі допустимого діапазону!\n";
+        return;
+    }
+
+    // Перевірка непарності
+    bool isOdd = (A % 2 != 0) && (B % 2 != 0);
+    if (isOdd) {
+        cout << "Істинно: обидва числа непарні" << endl;
+    } else {
+        cout << "Хибно: одне або обидва числа парні" << endl;
+    }
+}
+
+// Integer3: Функція для розрахунку кількості повних кілобайт (залишаємо без змін)
+void calculateKilobytes() {
+    unsigned long long fileSize;
+    cout << "Введіть розмір файлу в байтах: ";
+    cin >> fileSize;
+    unsigned long long kilobytes = fileSize / 1024;
+    cout << "Кількість повних кілобайт: " << kilobytes << endl;
+}
+
+// Головне меню програми
+void displayMenu() {
+    cout << "\nОберіть завдання:\n";
+    cout << "1. Proc31: Перетворення градусів у радіани\n";
+    cout << "2. Boolean8: Перевірка непарності чисел\n";
+    cout << "3. Integer3: Розрахунок повних кілобайт\n";
+    cout << "Ваш вибір: ";
+}
+
+int main() {
+    int choice;
+
+    // Відображення меню та вибір завдання
+    displayMenu();
+    cin >> choice;
+
+    switch (choice) {
+        case 1:
+            // Виконання Proc31
+            {
+                double radians = inputAndConvertToRadians();
+                if (radians != -1) {
+                    cout << "Результат у радіанах: " << radians << endl;
+                }
+            }
+            break;
+        case 2:
+            // Виконання Boolean8
+            inputAndCheckOddness();
+            break;
+        case 3:
+            // Виконання Integer3
+            calculateKilobytes();
+            break;
+        default:
+            cout << "Неправильний вибір. Спробуйте ще раз." << endl;
+            break;
+    }
+
+    return 0;
+}
